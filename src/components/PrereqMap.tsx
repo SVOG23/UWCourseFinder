@@ -3,8 +3,8 @@ import { Catalog } from "../lib/courses";
 import { useAppStore } from "../store/useAppStore";
 import { displayStatus } from "../lib/plan";
 
-const NW = 156;
-const NH = 64;
+const NW = 162;
+const NH = 74;
 const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
 
 type Pos = Record<string, { x: number; y: number }>;
