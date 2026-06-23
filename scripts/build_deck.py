@@ -168,7 +168,7 @@ def bullets(s, l, t, w, h, items, size=18, gap=12):
 def footer(s, num, light=False):
     c = LAVENDER if light else MUTED
     text(s, 0.92, 6.95, 6, 0.4, "UW Course Finder", size=11, color=c, bold=True)
-    text(s, 11.0, 6.95, 1.5, 0.4, f"{num} / 8", size=11, color=c, align=PP_ALIGN.RIGHT, font=MONO)
+    text(s, 11.0, 6.95, 1.5, 0.4, f"{num} / 9", size=11, color=c, align=PP_ALIGN.RIGHT, font=MONO)
 
 
 def connector(s, x1, y1, x2, y2):
@@ -224,7 +224,7 @@ text(s, 9.95, 3.18, 2.5, 1.0, [[("52%", {"size": 34, "color": WHITE, "bold": Tru
                                [("COMPLETE", {"size": 10, "color": LAVENDER, "font": MONO})]],
      align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE, spacing=1.0)
 text(s, 0.92, 6.95, 6, 0.4, "University of Washington", size=11, color=LAVENDER, bold=True)
-text(s, 11.0, 6.95, 1.5, 0.4, "1 / 8", size=11, color=LAVENDER, align=PP_ALIGN.RIGHT, font=MONO)
+text(s, 11.0, 6.95, 1.5, 0.4, "1 / 9", size=11, color=LAVENDER, align=PP_ALIGN.RIGHT, font=MONO)
 
 # ---- Slide 2: Problem -----------------------------------------------------
 s = slide()
@@ -332,7 +332,37 @@ bullets(s, 0.92, 4.3, 11.5, 2.3, [
 ], size=18)
 footer(s, 5)
 
-# ---- Slide 6: Impact ------------------------------------------------------
+# ---- Slide 6: Landscape & Market ------------------------------------------
+s = slide()
+kicker(s, "Landscape & market")
+heading(s, "Different by design — built for every Husky.")
+card(s, 0.92, 2.2, 5.7, 4.05)
+text(s, 1.2, 2.4, 5.2, 0.5, "What exists today", size=20, color=PURPLE, bold=False, font=SERIF)
+_rows = [
+    ("MyPlan", "Builds a schedule — no prereq-valid degree path"),
+    ("DARS", "A checklist of what's left — no sequencing"),
+    ("prereq-map", "Visual only (archived 2022) — no personalization"),
+    ("Us", "Auto-planned + editable + interactive prereq map, per major"),
+]
+_y = 2.98
+for _k, _v in _rows:
+    _us = _k == "Us"
+    text(s, 1.2, _y, 1.35, 0.4, _k, size=12, color=(PURPLE if _us else GOLD_D), bold=True, font=MONO)
+    text(s, 2.55, _y, 3.9, 0.7, _v, size=12.5, color=(INK if _us else T2), bold=_us, spacing=1.1)
+    _y += 0.78
+card(s, 6.85, 2.2, 5.6, 4.05)
+text(s, 7.13, 2.4, 5.1, 0.5, "Who it's for", size=20, color=PURPLE, bold=False, font=SERIF)
+bullets(s, 7.13, 3.0, 5.05, 3.0, [
+    [("~36,000", {"bold": True, "color": PURPLE}),
+     (" UW Seattle undergrads (~60k across campuses) — all plan a degree.", {})],
+    [("Highest need: ", {}),
+     ("freshmen, transfer students, pre-major applicants", {"bold": True}),
+     (" to capacity-capped majors, and major-switchers.", {})],
+    "Free, no login — zero-friction; expandable to every major and to peer schools.",
+], size=14, gap=14)
+footer(s, 6)
+
+# ---- Slide 7: Impact ------------------------------------------------------
 s = slide()
 kicker(s, "The impact")
 heading(s, "Clearer planning, on-time graduation.")
@@ -350,9 +380,9 @@ text(s, 1.25, 5.0, 10.9, 1.1,
      "A natural input to MyPlan and advising — turning static requirements into a "
      "living, personal roadmap for every Husky.", size=18, color=INK, spacing=1.25,
      anchor=MSO_ANCHOR.MIDDLE)
-footer(s, 6)
+footer(s, 7)
 
-# ---- Slide 7: Roadmap -----------------------------------------------------
+# ---- Slide 8: Roadmap -----------------------------------------------------
 s = slide()
 kicker(s, "What’s next")
 heading(s, "Roadmap.")
@@ -362,9 +392,9 @@ bullets(s, 0.92, 2.25, 11.5, 3.5, [
     "Live course & offerings data via a MyPlan partnership.",
     "Save, compare, and share plans; mobile-first layout.",
 ], size=20, gap=16)
-footer(s, 7)
+footer(s, 8)
 
-# ---- Slide 8: Closing -----------------------------------------------------
+# ---- Slide 9: Closing -----------------------------------------------------
 s = slide(PURPLE)
 kicker(s, "Try it", color=GOLD)
 text(s, 0.9, 1.6, 11.6, 1.5, "Plan your path.", size=56, color=WHITE, bold=False, font=SERIF)
@@ -380,7 +410,7 @@ text(s, 0.92, 6.1, 11.5, 0.6,
      "An unofficial, student-built planning aid — not affiliated with or endorsed by UW.",
      size=13, color=LAVENDER)
 text(s, 0.92, 6.95, 6, 0.4, "University of Washington", size=11, color=LAVENDER, bold=True)
-text(s, 11.0, 6.95, 1.5, 0.4, "8 / 8", size=11, color=LAVENDER, align=PP_ALIGN.RIGHT, font=MONO)
+text(s, 11.0, 6.95, 1.5, 0.4, "9 / 9", size=11, color=LAVENDER, align=PP_ALIGN.RIGHT, font=MONO)
 
 os.makedirs(os.path.dirname(OUT), exist_ok=True)
 prs.save(OUT)

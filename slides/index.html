@@ -46,7 +46,6 @@
       .slide-num { position: absolute; bottom: 4vh; right: 5vw; font-size: 0.78rem; color: var(--muted); font-family: var(--mono); }
       .brandtag { position: absolute; bottom: 4vh; left: 9vw; font-size: 0.78rem; color: var(--muted); font-weight: 600; }
 
-      /* Hero-style (purple) slides echo the app's degree hero */
       .hero { background: var(--purple); color: #fff; overflow: hidden; }
       .hero::before { content: ""; position: absolute; right: -80px; top: -100px; width: 360px; height: 360px; border-radius: 50%; background: var(--gold); opacity: 0.16; }
       .hero .kicker { color: #d8c79a; }
@@ -57,31 +56,23 @@
       .badge { display: inline-block; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.3); padding: 6px 14px; border-radius: 999px; font-size: 0.85rem; font-weight: 600; margin-top: 14px; font-family: var(--mono); }
       .slide-num.light, .brandtag.light { color: #cfc2ec; }
 
-      /* Progress ring */
       .ring { position: relative; width: 150px; height: 150px; flex: none; }
       .ring svg { transform: rotate(-90deg); }
       .ring .ctr { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
       .ring .pct { font-family: var(--serif); font-size: 38px; font-weight: 600; line-height: 1; }
       .ring .cap { font-size: 11px; color: #d7cfe6; letter-spacing: 0.08em; margin-top: 3px; font-family: var(--mono); }
-      .hero-stats { display: flex; flex-direction: column; gap: 16px; }
-      .hero-stat .n { font-family: var(--serif); font-size: 30px; font-weight: 600; line-height: 1; }
-      .hero-stat .n small { font-size: 16px; color: #d7cfe6; }
-      .hero-stat .c { font-size: 12.5px; color: #d7cfe6; margin-top: 3px; }
 
-      /* Pillars */
       .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 30px; }
       .pillar { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 26px; box-shadow: 0 10px 26px -16px rgba(36,28,59,0.25); }
       .pillar .bar { width: 42px; height: 5px; border-radius: 3px; background: var(--gold); margin-bottom: 16px; }
       .pillar h3 { font-family: var(--serif); color: var(--purple); font-size: 1.4rem; font-weight: 600; margin-bottom: 8px; }
       .pillar p { color: var(--t2); font-size: 1rem; line-height: 1.45; }
 
-      /* Stat cards */
       .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 30px; }
       .stat { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 22px; }
       .stat .big { font-family: var(--serif); font-size: 2.5rem; font-weight: 600; color: var(--purple); line-height: 1; }
       .stat .lbl { color: var(--muted); font-size: 0.92rem; margin-top: 8px; }
 
-      /* Two-view mockups */
       .twocol { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-top: 24px; }
       .panel { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 22px; box-shadow: 0 10px 26px -16px rgba(36,28,59,0.22); }
       .panel h3 { font-family: var(--serif); color: var(--purple); font-size: 1.35rem; font-weight: 600; margin-bottom: 4px; }
@@ -114,6 +105,17 @@
       .legend { display: flex; gap: 14px; margin-top: 14px; font-size: 0.78rem; color: var(--muted); flex-wrap: wrap; }
       .legend i { display: inline-block; width: 11px; height: 11px; border-radius: 4px; margin-right: 5px; vertical-align: middle; }
 
+      /* Landscape & market */
+      .cmp { display: flex; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--line); font-size: 0.98rem; }
+      .cmp:last-child { border-bottom: none; }
+      .cmp-k { font-family: var(--mono); font-weight: 700; color: var(--gold-d); min-width: 96px; flex: none; }
+      .cmp-v { color: var(--t2); }
+      .cmp-us .cmp-k { color: var(--purple); }
+      .cmp-us .cmp-v { color: var(--ink); font-weight: 600; }
+      .mlist { gap: 12px; }
+      .mlist li { font-size: 1.02rem; line-height: 1.4; }
+      .mlist strong { color: var(--purple); }
+
       .callout { margin-top: 26px; border-left: 4px solid var(--gold); background: #fcfbf7; padding: 16px 20px; border-radius: 0 10px 10px 0; font-size: 1.05rem; line-height: 1.45; max-width: 70ch; }
       .links { margin-top: 26px; font-size: 1.15rem; line-height: 2; }
       a { color: inherit; }
@@ -131,7 +133,7 @@
   <body>
     <div class="hint">← → / Space to navigate · Print → Save as PDF (landscape)</div>
     <div class="deck">
-      <!-- 1. Title (echoes the app's degree hero) -->
+      <!-- 1. Title -->
       <section class="slide hero">
         <div class="kicker">UW-IT Student Innovation Lab · Community Project Showcase</div>
         <div class="hero-row">
@@ -152,7 +154,7 @@
           </div>
         </div>
         <div class="brandtag light">University of Washington</div>
-        <div class="slide-num light">1 / 8</div>
+        <div class="slide-num light">1 / 9</div>
       </section>
 
       <!-- 2. Problem -->
@@ -168,7 +170,7 @@
           <li>Transfer and returning students feel it most.</li>
         </ul>
         <div class="brandtag">UW Course Finder</div>
-        <div class="slide-num">2 / 8</div>
+        <div class="slide-num">2 / 9</div>
       </section>
 
       <!-- 3. Solution -->
@@ -183,10 +185,10 @@
           <div class="pillar"><div class="bar"></div><h3>Explore</h3><p>An interactive map shows how each course flows into the ones it unlocks.</p></div>
         </div>
         <div class="brandtag">UW Course Finder</div>
-        <div class="slide-num">3 / 8</div>
+        <div class="slide-num">3 / 9</div>
       </section>
 
-      <!-- 4. Two views (refreshed mockups) -->
+      <!-- 4. Two views -->
       <section class="slide">
         <div class="kicker">How it works</div>
         <h2>Two views, one personalized plan.</h2>
@@ -231,7 +233,7 @@
           </div>
         </div>
         <div class="brandtag">UW Course Finder</div>
-        <div class="slide-num">4 / 8</div>
+        <div class="slide-num">4 / 9</div>
       </section>
 
       <!-- 5. Under the hood -->
@@ -250,10 +252,35 @@
           <li>React + TypeScript with a hand-built map canvas — no heavy frameworks. Deploys free as a static site.</li>
         </ul>
         <div class="brandtag">UW Course Finder</div>
-        <div class="slide-num">5 / 8</div>
+        <div class="slide-num">5 / 9</div>
       </section>
 
-      <!-- 6. Impact -->
+      <!-- 6. Landscape & Market -->
+      <section class="slide">
+        <div class="kicker">Landscape &amp; market</div>
+        <h2>Different by design — built for every Husky.</h2>
+        <div class="twocol">
+          <div class="panel">
+            <h3>What exists today</h3>
+            <div class="cmp"><span class="cmp-k">MyPlan</span><span class="cmp-v">Builds a schedule — no prereq-valid degree path</span></div>
+            <div class="cmp"><span class="cmp-k">DARS</span><span class="cmp-v">A checklist of what's left — no sequencing</span></div>
+            <div class="cmp"><span class="cmp-k">prereq-map</span><span class="cmp-v">Visual only (archived 2022) — no personalization</span></div>
+            <div class="cmp cmp-us"><span class="cmp-k">Us</span><span class="cmp-v">Auto-planned + editable + an interactive prereq map, per major</span></div>
+          </div>
+          <div class="panel">
+            <h3>Who it's for</h3>
+            <ul class="mlist">
+              <li><strong>~36,000</strong> UW Seattle undergrads (~60k across campuses) — all plan a degree.</li>
+              <li>Highest need: <strong>freshmen</strong>, <strong>transfer students</strong>, <strong>pre-major</strong> applicants to capacity-capped majors, and <strong>major-switchers</strong>.</li>
+              <li>Free, no login — zero-friction; expandable to every major &amp; peer schools.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="brandtag">UW Course Finder</div>
+        <div class="slide-num">6 / 9</div>
+      </section>
+
+      <!-- 7. Impact -->
       <section class="slide">
         <div class="kicker">The impact</div>
         <h2>Clearer planning, on-time graduation.</h2>
@@ -264,10 +291,10 @@
         </ul>
         <div class="callout">A natural input to MyPlan and advising — turning static requirements into a living, personal roadmap for every Husky.</div>
         <div class="brandtag">UW Course Finder</div>
-        <div class="slide-num">6 / 8</div>
+        <div class="slide-num">7 / 9</div>
       </section>
 
-      <!-- 7. Roadmap -->
+      <!-- 8. Roadmap -->
       <section class="slide">
         <div class="kicker">What's next</div>
         <h2>Roadmap.</h2>
@@ -278,10 +305,10 @@
           <li>Save, compare, and share plans; mobile-first layout.</li>
         </ul>
         <div class="brandtag">UW Course Finder</div>
-        <div class="slide-num">7 / 8</div>
+        <div class="slide-num">8 / 9</div>
       </section>
 
-      <!-- 8. Closing -->
+      <!-- 9. Closing -->
       <section class="slide hero">
         <div class="kicker">Try it</div>
         <h1>Plan your path.</h1>
@@ -292,7 +319,7 @@
         </div>
         <div class="hero-sub" style="margin-top:30px; font-size:0.95rem; color:#cfc2ec;">An unofficial, student-built planning aid — not affiliated with or endorsed by UW.</div>
         <div class="brandtag light">University of Washington</div>
-        <div class="slide-num light">8 / 8</div>
+        <div class="slide-num light">9 / 9</div>
       </section>
     </div>
 

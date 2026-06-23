@@ -17,4 +17,6 @@ so you can see the whole picture at a glance. Click any course for its credits,
 prerequisites, and when it's offered.
 
 Built on real UW course data for Computer Science, Informatics, Mathematics, and
-Applied Math, it turns a confusing process into a clear, visual plan.
+Applied Math — and unlike a static DARS checklist or MyPlan's scheduler, it
+sequences your whole path and maps it visually — turning a confusing process into
+a clear, visual plan.
