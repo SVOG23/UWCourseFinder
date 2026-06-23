@@ -353,8 +353,8 @@ for _k, _v in _rows:
 card(s, 6.85, 2.2, 5.6, 4.05)
 text(s, 7.13, 2.4, 5.1, 0.5, "Who it's for", size=20, color=PURPLE, bold=False, font=SERIF)
 bullets(s, 7.13, 3.0, 5.05, 3.0, [
-    [("~36,000", {"bold": True, "color": PURPLE}),
-     (" UW Seattle undergrads (~60k across campuses) — all plan a degree.", {})],
+    [("45,000+", {"bold": True, "color": PURPLE}),
+     (" undergraduates across UW's three campuses (~40k at Seattle) — all plan a degree.", {})],
     [("Highest need: ", {}),
      ("freshmen, transfer students, pre-major applicants", {"bold": True}),
      (" to capacity-capped majors, and major-switchers.", {})],
