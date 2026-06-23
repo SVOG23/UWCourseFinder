@@ -50,7 +50,7 @@ its limits:
 | Data | Source | Notes |
 | --- | --- | --- |
 | Course catalog (titles, credits, prerequisites, quarters offered, areas of knowledge) | [UW Course Descriptions](https://www.washington.edu/students/crscat/), scraped by the open-source [`kjiwa/uw-course-catalog`](https://github.com/kjiwa/uw-course-catalog) project | 14,171 Seattle-campus courses. Normalized by `scripts/build_data.py`. |
-| Degree requirements | Hand-encoded from the [Allen School B.S. requirements](https://www.cs.washington.edu/academics/undergraduate/degree-requirements/) | See `src/data/programs.ts`. Simplified for planning — **not** an official audit. |
+| Degree requirements | Hand-encoded from official department pages: [Allen School CS](https://www.cs.washington.edu/academics/undergraduate/degree-requirements/), [iSchool Informatics](https://ischool.uw.edu/programs/informatics/curriculum), [Mathematics](https://math.washington.edu/bs-mathematics-major-requirements), and [ACMS](https://acms.washington.edu/graduation) | See `src/data/programs.ts`. Simplified for planning — **not** an official audit. |
 | Completed courses | You — via search, or by pasting a [DARS audit](https://myplan.uw.edu) | UW's DARS/MyPlan APIs require institutional authentication, so live integration isn't possible for a public app; pasting the audit is the bridge. |
 
 ### Known limitations (read before you trust it)
