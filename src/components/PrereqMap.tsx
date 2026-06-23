@@ -25,24 +25,68 @@ export function PrereqMap({ catalog }: { catalog: Catalog }) {
   const [nodePos, setNodePos] = useState<Pos | null>(null);
   const [grabbing, setGrabbing] = useState(false);
 
-  // Default positions: one column per quarter, courses stacked & centered.
+  // Every planned course, tagged with its quarter column index.
+  const planEntries = useMemo(() => {
+    const out: { id: string; qi: number }[] = [];
+    quarters.forEach((q, qi) => (plan[q.id] ?? []).forEach((id) => out.push({ id, qi })));
+    return out;
+  }, [plan, quarters]);
+
+  const planSet = useMemo(() => new Set(planEntries.map((e) => e.id)), [planEntries]);
+
+  // Prerequisite edges between planned courses (each course → its in-plan prereqs).
+  const rawEdges = useMemo(() => {
+    const es: [string, string][] = [];
+    for (const { id } of planEntries) {
+      const c = catalog.get(id);
+      if (!c) continue;
+      for (const p of c.prereqs) if (planSet.has(p) && p !== id) es.push([p, id]);
+    }
+    return es;
+  }, [planEntries, planSet, catalog]);
+
+  // A prerequisite map only shows courses that are part of the prerequisite web.
+  // Standalone courses (no prereqs and not a prereq of anything planned) would be
+  // unwired, so we leave them off the map — they still live in the Quarter Plan.
+  const connectedIds = useMemo(() => {
+    const s = new Set<string>();
+    for (const [a, b] of rawEdges) {
+      s.add(a);
+      s.add(b);
+    }
+    return s;
+  }, [rawEdges]);
+
+  const shownEntries = useMemo(
+    () => (connectedIds.size ? planEntries.filter((e) => connectedIds.has(e.id)) : planEntries),
+    [planEntries, connectedIds],
+  );
+  const hiddenCount = planEntries.length - shownEntries.length;
+
+  // Default positions: one compact column per quarter that has shown courses.
   const defaultPos = useMemo<Pos>(() => {
+    const byCol = new Map<number, string[]>();
+    for (const { id, qi } of shownEntries) {
+      if (!byCol.has(qi)) byCol.set(qi, []);
+      byCol.get(qi)!.push(id);
+    }
+    const cols = [...byCol.keys()].sort((a, b) => a - b);
     const pitchX = 196;
     const x0 = 24;
     const totalH = 540;
     const vGap = 20;
     const padTop = 16;
     const pos: Pos = {};
-    quarters.forEach((q, ti) => {
-      const ids = plan[q.id] ?? [];
+    cols.forEach((qi, col) => {
+      const ids = byCol.get(qi)!;
       const block = ids.length * NH + (ids.length - 1) * vGap;
       const startY = padTop + (totalH - 2 * padTop - block) / 2;
       ids.forEach((id, i) => {
-        pos[id] = { x: x0 + ti * pitchX, y: startY + i * (NH + vGap) };
+        pos[id] = { x: x0 + col * pitchX, y: startY + i * (NH + vGap) };
       });
     });
     return pos;
-  }, [plan, quarters]);
+  }, [shownEntries]);
 
   const pos = nodePos ?? defaultPos;
 
@@ -56,22 +100,19 @@ export function PrereqMap({ catalog }: { catalog: Catalog }) {
 
   const edges = useMemo(() => {
     const out: string[] = [];
-    for (const id of Object.keys(pos)) {
-      const c = catalog.get(id);
-      if (!c) continue;
-      for (const p of c.prereqs) {
-        if (pos[p] && pos[id]) {
-          const x1 = pos[p].x + NW;
-          const y1 = pos[p].y + NH / 2;
-          const x2 = pos[id].x;
-          const y2 = pos[id].y + NH / 2;
-          const mx = (x1 + x2) / 2;
-          out.push(`M ${x1} ${y1} C ${mx} ${y1}, ${mx} ${y2}, ${x2} ${y2}`);
-        }
-      }
+    for (const [a, b] of rawEdges) {
+      const pa = pos[a];
+      const pb = pos[b];
+      if (!pa || !pb) continue;
+      const x1 = pa.x + NW;
+      const y1 = pa.y + NH / 2;
+      const x2 = pb.x;
+      const y2 = pb.y + NH / 2;
+      const mx = (x1 + x2) / 2;
+      out.push(`M ${x1} ${y1} C ${mx} ${y1}, ${mx} ${y2}, ${x2} ${y2}`);
     }
     return out;
-  }, [pos, catalog]);
+  }, [rawEdges, pos]);
 
   const fitView = useCallback(() => {
     const el = canvasRef.current;
@@ -171,7 +212,6 @@ export function PrereqMap({ catalog }: { catalog: Catalog }) {
     [onMove, onUp],
   );
 
-  // wheel-to-zoom (attached non-passively so we can preventDefault)
   const onWheel = useCallback((e: WheelEvent) => {
     e.preventDefault();
     const el = canvasRef.current;
@@ -209,7 +249,11 @@ export function PrereqMap({ catalog }: { catalog: Catalog }) {
         <span className="lt">Legend</span>
         <span className="leg"><i className="completed" />Completed</span>
         <span className="leg"><i className="planned" />Planned</span>
-        <span className="leg"><i className="available" />Available later</span>
+        {hiddenCount > 0 && (
+          <span className="leg-note">
+            {hiddenCount} course{hiddenCount === 1 ? "" : "s"} without prerequisite links are in your Quarter Plan
+          </span>
+        )}
       </div>
 
       <div
@@ -252,7 +296,7 @@ export function PrereqMap({ catalog }: { catalog: Catalog }) {
           </button>
         </div>
 
-        {ids.length === 0 && <div className="map-empty">No courses in your plan yet.</div>}
+        {ids.length === 0 && <div className="map-empty">No prerequisite links to show yet.</div>}
         <div className="map-hint">Drag a node to move it · scroll to zoom · drag canvas to pan</div>
       </div>
     </div>
