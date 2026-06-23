@@ -107,3 +107,20 @@ export interface RequirementProgress {
   remainingCourses: string[]; // concrete remaining candidates (best-effort)
   fraction: number; // 0..1
 }
+
+// ---- Dashboard plan model -------------------------------------------------
+
+/** A quarter column in the plan: id like "A2024", label "Autumn 2024". */
+export interface QuarterMeta {
+  id: string;
+  term: string;
+  quarter: Quarter;
+  year: number;
+  accent: string;
+}
+
+/** quarterId -> ordered list of course ids scheduled that quarter. */
+export type PlanMap = Record<string, string[]>;
+
+/** A course's status relative to "now" and the plan. */
+export type DisplayStatus = "completed" | "planned" | "available";
